@@ -1,8 +1,3 @@
-databases:
-  - name: directus-db
-    plan: free
-    region: frankfurt
-
 services:
   - type: web
     name: directus
@@ -12,19 +7,20 @@ services:
     plan: free
     region: frankfurt
     envVars:
-      - key: PORT
-        value: "10000"
-      - key: KEY
-        generateValue: true
-      - key: SECRET
-        generateValue: true
-      - key: ADMIN_EMAIL
-        value: admin@example.com
-      - key: ADMIN_PASSWORD
-        value: change-me-please
       - key: DATABASE_URL
         fromDatabase:
           name: directus-db
           property: connectionString
+      - key: KEY
+        generateValue: true
+      - key: SECRET
+        generateValue: true
+      - key: PORT
+        value: "10000"
     healthCheckPath: /server/health
     autoDeploy: true
+
+databases:
+  - name: directus-db
+    plan: free
+    region: frankfurt
